@@ -8,7 +8,7 @@
 #     Running a container:
 #
 #          # docker run --rm -it --cap-add=NET_ADMIN --sysctl net.ipv6.conf.all.disable_ipv6=0 \
-#            --name epc1 -p 3000:8000 --device /dev/net/tun nextepc:1.0
+#            --name epc1 -p 8000:3000 --device /dev/net/tun nextepc:1.0
 #
 #     Notes:
 #       - The container requires NET_ADMIN permission in order to create a tun interface
