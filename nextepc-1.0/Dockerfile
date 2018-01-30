@@ -51,17 +51,16 @@ WORKDIR nextepc
 
 CMD \
 # Start the database server
-    mongod --smallfiles --dbpath /var/lib/mongo --fork --logpath /var/log/mongo/mongod.log \
-# Start the web server
- && npm run start --prefix webui \
+    mongod --smallfiles --fork --dbpath /var/lib/mongodb --logpath /var/log/mongodb/mongodb.log \
 # Create a tun interface to be used by the P-GW
- &  ip tuntap add name pgwtun mode tun \
+ && ip tuntap add name pgwtun mode tun \
  && ip addr add 45.45.0.1/16 dev pgwtun \
  && ip addr add cafe::1/16 dev pgwtun \
  && ip link set pgwtun up \
-# start the EPC deamon
- && ./nextepc-epcd
-
+# Start the web server
+ && { npm run start --prefix webui & \
+# Start the EPC deamon
+ ./nextepc-epcd; }
 
 # ---------------Note-----------------------------------------------------
 # By default, an LTE UE will receive a IP address with the network address

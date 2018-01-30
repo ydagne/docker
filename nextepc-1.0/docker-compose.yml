@@ -2,6 +2,7 @@ version: "2.1"
 
 services:
     nextepc:
+        tty: true
         build:
             context: .
         image:  ydagne/nextepc:1.0
@@ -25,8 +26,8 @@ services:
         # If no volumes are mounted MongoDB database (at /var/lib/mongo/), then all
         # subscriber information will be lost when the container is stopped.
         volumes:
-            - ./mongo/db:/var/lib/mongo
-            - ./mongo/log:/var/log/mongo
+            - ./mongo/db:/var/lib/mongodb
+            - ./mongo/log:/var/log/mongodb
             # Mount configuration files to override default values
             - ./conf/mme.conf:/nextepc/install/etc/nextepc/mme.conf
 
